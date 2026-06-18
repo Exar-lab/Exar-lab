@@ -95,7 +95,6 @@ Spec → Tests (fail) → Implement → Tests (pass) → Refactor → Review
 ## 📫 Contact
 
 - **Email:** exarviquezmasis@gmail.com
-- **Phone:** +506 6148-0220
 - **Location:** Alajuela, Costa Rica
 
 ---
