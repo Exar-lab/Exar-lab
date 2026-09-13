@@ -1,3 +1,7 @@
+<p align="center">
+  <img width="120" height="120" alt="exar-logo" src="https://github.com/user-attachments/assets/82adc896-5368-4764-8ece-8c4e7205c943" />
+</p>
+
 <h1 align="center">Hi, I'm Exar Víquez Masís 👋</h1>
 <h3 align="center">Backend Developer · AI-Driven Development · SDD & TDD</h3>
 
