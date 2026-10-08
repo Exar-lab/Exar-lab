@@ -66,12 +66,15 @@ I'm open to backend and Java/Spring Boot opportunities and collaborations.
 
 <div align="center">
 
-<a href="mailto:exarviquezmasis@gmail.com"><img src="https://img.shields.io/badge/Email-exarviquezmasis%40gmail.com-22d3ee?style=for-the-badge&logo=gmail&logoColor=050a14&labelColor=0a1830" alt="Email" /></a>
-<a href="https://github.com/Exar-lab"><img src="https://img.shields.io/badge/GitHub-Exar--lab-3b82f6?style=for-the-badge&logo=github&logoColor=white&labelColor=0a1830" alt="GitHub" /></a>
+<a href="mailto:exarviquezmasis@gmail.com"><img src="https://img.shields.io/badge/Email-exarviquezmasis%40gmail.com-40e0d0?style=for-the-badge&logo=gmail&logoColor=03100f&labelColor=07201f" alt="Email" /></a>
+<a href="https://github.com/Exar-lab"><img src="https://img.shields.io/badge/GitHub-Exar--lab-14b8a6?style=for-the-badge&logo=github&logoColor=white&labelColor=07201f" alt="GitHub" /></a>
 
 <br /><br />
 
-<img src="https://github-readme-stats.vercel.app/api?username=Exar-lab&show_icons=true&theme=transparent&bg_color=0a1830&title_color=22d3ee&icon_color=3b82f6&text_color=8aa4bf&border_color=1b4466&hide_border=false" alt="GitHub stats" height="165" />
-<img src="https://github-readme-stats.vercel.app/api/top-langs/?username=Exar-lab&layout=compact&theme=transparent&bg_color=0a1830&title_color=22d3ee&text_color=8aa4bf&border_color=1b4466" alt="Top languages" height="165" />
+<img src="assets/stats.svg" alt="GitHub stats" width="100%" />
+
+<br /><br />
+
+<img src="assets/languages.svg" alt="Top languages" width="100%" />
 
 </div>
