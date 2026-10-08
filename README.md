@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/header.svg?v=2" alt="Exar Víquez Masís — Backend Developer" width="100%" />
+<img src="assets/header.svg?v=3" alt="Exar Víquez Masís — Backend Developer" width="100%" />
 
 </div>
 
@@ -16,19 +16,19 @@ My workflow combines **Spec-Driven Development (SDD)**, **Test-Driven Developmen
 
 <div align="center">
 
-<img src="assets/tech-universe.svg?v=2" alt="Technology universe: backend, data, architecture and tooling" width="100%" />
+<img src="assets/tech-universe.svg?v=3" alt="Technology universe: backend, data, architecture and tooling" width="100%" />
 
 <br /><br />
 
-<img src="assets/architecture.svg?v=2" alt="System architecture: hexagonal, domain-driven design" width="100%" />
+<img src="assets/architecture.svg?v=3" alt="System architecture: hexagonal, domain-driven design" width="100%" />
 
 <br /><br />
 
-<img src="assets/ai-engineering.svg?v=2" alt="AI-driven engineering: SDD, TDD, MCP and agents" width="100%" />
+<img src="assets/ai-engineering.svg?v=3" alt="AI-driven engineering: SDD, TDD, MCP and agents" width="100%" />
 
 <br /><br />
 
-<a href="https://github.com/Exar-lab/AegisNotify"><img src="assets/projects.svg?v=2" alt="Featured projects: AegisNotify and Bank-project" width="100%" /></a>
+<a href="https://github.com/Exar-lab/AegisNotify"><img src="assets/projects.svg?v=3" alt="Featured projects: AegisNotify and Bank-project" width="100%" /></a>
 
 <br />
 
@@ -39,7 +39,7 @@ My workflow combines **Spec-Driven Development (SDD)**, **Test-Driven Developmen
 
 <br /><br />
 
-<img src="assets/principles.svg?v=2" alt="Engineering philosophy" width="100%" />
+<img src="assets/principles.svg?v=3" alt="Engineering philosophy" width="100%" />
 
 </div>
 
@@ -71,10 +71,10 @@ I'm open to backend and Java/Spring Boot opportunities and collaborations.
 
 <br /><br />
 
-<img src="assets/stats.svg?v=2" alt="GitHub stats" width="100%" />
+<img src="assets/stats.svg?v=3" alt="GitHub stats" width="100%" />
 
 <br /><br />
 
-<img src="assets/languages.svg?v=2" alt="Top languages" width="100%" />
+<img src="assets/languages.svg?v=3" alt="Top languages" width="100%" />
 
 </div>

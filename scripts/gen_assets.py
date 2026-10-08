@@ -28,6 +28,14 @@ def defs():
 .sans{{font-family:'Segoe UI','Helvetica Neue',Arial,sans-serif}}
 @keyframes pulse{{0%,100%{{opacity:.35}}50%{{opacity:1}}}}
 .pulse{{animation:pulse 2.8s ease-in-out infinite}}
+@keyframes glow{{0%,100%{{stroke-opacity:.3}}50%{{stroke-opacity:1}}}}
+.glow{{animation:glow 3s ease-in-out infinite}}
+@keyframes flow{{to{{stroke-dashoffset:-9}}}}
+.flow{{animation:flow .9s linear infinite}}
+@keyframes spin{{to{{transform:rotate(360deg)}}}}
+.spin{{animation:spin 8s linear infinite}}
+@keyframes load{{0%{{transform:scaleX(.2)}}100%{{transform:scaleX(1)}}}}
+.load{{animation:load 2.4s ease-in-out infinite alternate}}
 </style>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="{BG1}"/><stop offset="1" stop-color="{BG2}"/></linearGradient>
 <linearGradient id="card" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#0b2b2a" stop-opacity=".92"/><stop offset="1" stop-color="#061a19" stop-opacity=".92"/></linearGradient>
@@ -47,22 +55,34 @@ def frame(w, h, title, sub, body, title_y=52):
         head = (t(w/2, title_y, title, 30, "url(#acc)", "sans", "800", "middle", 1.5) +
                 t(w/2, title_y + 22, sub, 9.5, CYAN, "mono", "400", "middle", 3) +
                 f'<rect x="{w/2-90}" y="{title_y+32}" width="180" height="1.5" fill="url(#accfade)"/>')
+    parts = ""
+    for i in range(12):
+        px = (61 * i + 47) % (w - 60) + 30
+        dur = 8 + (i % 5) * 2
+        parts += (f'<circle cx="{px}" r="{1.2 + (i % 3) * .5}" fill="{CYAN}" opacity=".4">'
+                  f'<animate attributeName="cy" from="{h}" to="0" dur="{dur}s" begin="-{i * 1.7:.1f}s" repeatCount="indefinite"/></circle>')
+    scan = (f'<rect y="12" width="2" height="{h-24}" fill="{CYAN}" opacity=".3">'
+            f'<animate attributeName="x" from="14" to="{w-14}" dur="10s" repeatCount="indefinite"/></rect>')
     return (f'<svg xmlns="http://www.w3.org/2000/svg" width="{w}" height="{h}" viewBox="0 0 {w} {h}" role="img" aria-label="{esc(title)}">'
             f'{defs()}<rect width="{w}" height="{h}" rx="16" fill="url(#bg)"/>'
             f'<rect width="{w}" height="{h}" rx="16" fill="url(#grid)"/>'
             f'<rect x=".75" y=".75" width="{w-1.5}" height="{h-1.5}" rx="15" fill="none" stroke="{LINE}"/>'
-            f'{brackets}{head}{body}</svg>')
+            f'{brackets}{parts}{head}{body}{scan}</svg>')
 
 
 def card(x, y, w, h, top=True):
     s = f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="12" fill="url(#card)" stroke="{LINE}"/>'
     if top:
         s += f'<rect x="{x+10}" y="{y}" width="{w-20}" height="3" rx="1.5" fill="url(#acc)"/>'
+        d = ((int(x) * 7 + int(y) * 3) % 17) / 5
+        s += (f'<rect x="{x+10}" y="{y}" width="46" height="3" rx="1.5" fill="{SKY}" opacity=".85">'
+              f'<animate attributeName="x" from="{x+10}" to="{x+w-56}" dur="3.4s" begin="{d:.1f}s" repeatCount="indefinite"/></rect>')
     return s
 
 
 def chip(x, y, label, w=38, h=30):
-    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="#0a2423" stroke="{CYAN}" stroke-opacity=".45"/>'
+    d = ((int(x) * 5 + int(y) * 3) % 20) / 8
+    return (f'<rect x="{x}" y="{y}" width="{w}" height="{h}" rx="8" fill="#0a2423" stroke="{CYAN}" class="glow" style="animation-delay:{d:.2f}s"/>'
             + t(x + w/2, y + h/2 + 3.5, label, 9.5, CYAN, "mono", "700", "middle"))
 
 
@@ -90,7 +110,7 @@ def header():
     b += t(450, 232, "ALAJUELA, COSTA RICA   //   ES: NATIVE   ·   EN: B2   //   UNIVERSIDAD NACIONAL", 8.5, DIM, "mono", "400", "middle", 2)
     scan = (f'<rect y="14" width="2" height="222" fill="{CYAN}" opacity=".35">'
             f'<animate attributeName="x" from="20" to="880" dur="7s" repeatCount="indefinite"/></rect>')
-    return frame(w, h, "", "", scan + b)
+    return frame(w, h, "", "", b)
 
 
 # ---------------------------------------------------------------- TECH UNIVERSE
@@ -136,7 +156,7 @@ def tech():
         b += t(x + 14, y0 + ch - 44, flabel, 8.5, CYAN, "mono", "400", "start", 2)
         b += t(x + 14, y0 + ch - 26, fval, 11, TXT, "sans", "700")
         b += f'<rect x="{x+14}" y="{y0+ch-14}" width="{cw-28}" height="3" rx="1.5" fill="{LINE}"/>'
-        b += f'<rect x="{x+14}" y="{y0+ch-14}" width="{(cw-28)*0.7:.0f}" height="3" rx="1.5" fill="url(#acc)" class="pulse"/>'
+        b += f'<rect x="{x+14}" y="{y0+ch-14}" width="{(cw-28)*0.7:.0f}" height="3" rx="1.5" fill="url(#acc)" class="load" style="transform-origin:{x+14}px {y0+ch-14}px;animation-delay:{i*0.35}s"/>'
     b += t(450, 482, "SYSTEMS CONNECTED  //  4 DOMAINS  //  SPEC-DRIVEN  //  TEST-FIRST  //  BUILD · TEST · SHIP",
            8, DIM, "mono", "400", "middle", 2)
     return frame(w, h, "TECHNOLOGY UNIVERSE", "BACKEND STACK / DATA / ARCHITECTURE / TOOLING", b)
@@ -155,8 +175,12 @@ def arch():
               + t(450, y + 21, label, 10.5, TXT, "mono", "700", "middle", 1.5))
         if i < 3:
             b += f'<circle cx="450" cy="{y+40}" r="2.6" fill="{CYAN}" class="pulse"/>'
-    b += f'<line x1="40" y1="300" x2="860" y2="300" stroke="{CYAN}" stroke-opacity=".5" stroke-dasharray="3 6"/>'
+    b += f'<line x1="40" y1="300" x2="860" y2="300" stroke="{CYAN}" stroke-opacity=".6" stroke-dasharray="3 6" class="flow"/>'
     b += f'<circle cx="450" cy="300" r="5" fill="{CYAN}" class="pulse"/>'
+    for k, path in enumerate(["M450 104 V 262", "M450 104 V 262"]):
+        b += (f'<circle r="3.5" fill="{SKY}"><animateMotion dur="2.6s" begin="-{k*1.3}s" repeatCount="indefinite" path="{path}"/></circle>')
+    for k, path in enumerate(["M450 300 H 40", "M450 300 H 860", "M40 300 H 450", "M860 300 H 450"]):
+        b += (f'<circle r="3" fill="{SKY}" opacity=".9"><animateMotion dur="3.2s" begin="-{k*0.8}s" repeatCount="indefinite" path="{path}"/></circle>')
     cards = [
         ("01 / ENTRY", "API", "CONTROLLERS / SECURITY", ["REST Controllers", "JWT Authentication", "Role-based Access"]),
         ("02 / USE CASES", "APPLICATION", "ORCHESTRATION / PORTS", ["Use Cases", "Input / Output Ports", "Transactions"]),
@@ -169,7 +193,8 @@ def arch():
         x = x0 + i * (cw + gap)
         b += card(x, y0, cw, ch)
         b += t(x + 12, y0 + 26, lab, 8.5, CYAN, "mono", "400", "start", 1.5)
-        b += f'<circle cx="{x+cw-24}" cy="{y0+46}" r="14" fill="none" stroke="{CYAN}" stroke-opacity=".6"/>'
+        b += (f'<circle cx="{x+cw-24}" cy="{y0+46}" r="14" fill="none" stroke="{CYAN}" stroke-opacity=".7" stroke-dasharray="5 4" '
+              f'class="spin" style="transform-origin:{x+cw-24}px {y0+46}px"/>')
         b += f'<circle cx="{x+cw-24}" cy="{y0+46}" r="4" fill="{CYAN}" class="pulse"/>'
         b += t(x + 12, y0 + 62, name, 15, TXT, "sans", "800")
         b += t(x + 12, y0 + 80, sub, 7.5, MUTED, "mono", "400", "start", 1)
@@ -197,8 +222,11 @@ def ai():
         b += t(x + 20, 182, sub, 8.5, MUTED, "mono", "400", "start", 1.5)
         b += f'<rect x="{x+20}" y="196" width="370" height="1" fill="{LINE}"/>'
         for k, ln in enumerate(lines):
-            b += f'<circle cx="{x+26}" cy="{222+k*22}" r="3" fill="{CYAN}"/>'
+            b += f'<circle cx="{x+26}" cy="{222+k*22}" r="3" fill="{CYAN}" class="pulse" style="animation-delay:{k*0.45+i*0.2:.2f}s"/>'
             b += t(x + 40, 226 + k * 22, ln, 11.5, MUTED)
+    b += f'<line x1="30" y1="334" x2="870" y2="334" stroke="{CYAN}" stroke-opacity=".5" stroke-dasharray="3 6" class="flow"/>'
+    for k in range(2):
+        b += (f'<circle r="3.5" fill="{SKY}"><animateMotion dur="4s" begin="-{k*2}s" repeatCount="indefinite" path="M30 334 H 870"/></circle>')
     labs = ["SDD", "TDD", "MCP", "AGENTS"]
     x = 450 - (4 * 110 + 3 * 14) / 2
     for lab in labs:
@@ -225,16 +253,17 @@ def projects():
         x = 30 + i * 440
         b += card(x, 100, 410, 200)
         b += t(x + 20, 128, lab, 9, CYAN, "mono", "400", "start", 2)
+        b += f'<circle cx="{x+390}" cy="124" r="4" fill="{CYAN}" class="pulse" style="animation-delay:{i*0.6}s"/>'
         b += t(x + 20, 160, name, 24, TXT, "sans", "800")
         b += t(x + 20, 180, sub, 10, MUTED)
         tx = x + 20
         for tg in tags:
             wd = 14 + len(tg) * 7.2
-            b += (f'<rect x="{tx}" y="194" width="{wd:.0f}" height="22" rx="11" fill="#0a2423" stroke="{CYAN}" stroke-opacity=".5"/>'
+            b += (f'<rect x="{tx}" y="194" width="{wd:.0f}" height="22" rx="11" fill="#0a2423" stroke="{CYAN}" class="glow" style="animation-delay:{(len(tg)%5)*0.5:.1f}s"/>'
                   + t(tx + wd/2, 209, tg, 8.5, SKY, "mono", "700", "middle", 1))
             tx += wd + 8
         for k, ln in enumerate(lines):
-            b += f'<circle cx="{x+26}" cy="{238+k*20}" r="2.5" fill="{CYAN}"/>'
+            b += f'<circle cx="{x+26}" cy="{238+k*20}" r="2.5" fill="{CYAN}" class="pulse" style="animation-delay:{k*0.4+i*0.2:.1f}s"/>'
             b += t(x + 38, 242 + k * 20, ln, 10.5, MUTED)
     return frame(w, h, "FEATURED PROJECTS", "BACKEND SYSTEMS / OPEN SOURCE", b)
 
@@ -252,8 +281,8 @@ def principles():
     for i, (n, name, desc) in enumerate(items):
         x = x0 + i * (cw + gap)
         b += card(x, 96, cw, 120)
-        b += t(x + 14, 124, n, 18, CYAN, "mono", "700")
-        b += f'<circle cx="{x+cw-18}" cy="118" r="4" fill="{CYAN}" class="pulse"/>'
+        b += f'<g class="pulse" style="animation-delay:{i*0.5}s">' + t(x + 14, 124, n, 18, CYAN, "mono", "700") + '</g>'
+        b += f'<circle cx="{x+cw-18}" cy="118" r="4" fill="{CYAN}" class="pulse" style="animation-delay:{i*0.5}s"/>'
         b += t(x + cw/2, 158, name, 11.5, TXT, "sans", "800", "middle", 1)
         b += f'<rect x="{x+14}" y="170" width="{cw-28}" height="1" fill="{LINE}"/>'
         b += t(x + cw/2, 194, desc, 8.8, MUTED, "sans", "400", "middle")
