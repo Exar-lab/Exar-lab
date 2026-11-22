@@ -45,6 +45,18 @@ My workflow combines **Spec-Driven Development (SDD)**, **Test-Driven Developmen
 
 <br />
 
+## Portfolio
+
+<div align="center">
+
+<a href="https://exar-lab.github.io/portfolio/"><img src="https://img.shields.io/badge/Open_my_portfolio-an_interactive_book_on_a_desk-40e0d0?style=for-the-badge&logo=githubpages&logoColor=03100f&labelColor=07201f" alt="Open my portfolio" /></a>
+
+<sub>A 3D book on a wooden desk, one mini-site per project. Source: <a href="https://github.com/Exar-lab/portfolio"><b>Exar-lab/portfolio</b></a></sub>
+
+</div>
+
+<br />
+
 ## What I bring
 
 - RESTful CRUD APIs with Spring Boot, JPA/Hibernate and MySQL
